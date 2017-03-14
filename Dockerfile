@@ -1,11 +1,14 @@
-FROM sebp/elk
+FROM elkdocker_elk
 
 # add my own conf file
-ADD ./my-pipe.conf /etc/logstash/conf.d/my-pipe.conf
-# alter beats file
-ADD ./30-output.conf /etc/logstash/conf.d/30-output.conf
-ADD ./02-beats-input.conf /etc/logstash/conf.d/02-beats-input.conf
+#ADD ./input.conf /etc/logstash/conf.d/inputs.conf
+#ADD ./output.conf /etc/logstash/conf.d/outputs.conf
+ADD ./keep-alive-filter.conf /etc/logstash/conf.d/keep-alive-filter.conf
 
-#ENV ES_HOME /opt/kibana
+#RUN rm /etc/logstash/conf.d/10-syslog.conf
+#RUN rm /etc/logstash/conf.d/11-nginx.conf
+#ENV ES_HOME /etc/logstash/conf.d
 #WORKDIR ${ES_HOME}
-#RUN ./bin/kibana-plugin install elastic/sense
+#RUN rm my-pipe.conf
+#RUN rm 02-beats-input.conf
+#RUN rm 30-output.conf
